@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { EmployeserviceService } from '../services/employeservice.service';
 import {DatePipe, formatDate} from '@angular/common';
 
-
-
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -37,13 +35,10 @@ export class EmployeeComponent implements OnInit {
               private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.employeService.userDetailsObs.subscribe((searchData) =>{
+    this.employeService.userDetailsObs.subscribe((searchData) => {
       this.searchData = searchData;
-      
-  })
-  
+    })
     this.mybreakpoint = (window.innerWidth <= 600) ? 1 : 4;
-
     this.employeeDetails = this.formBuilder.group({
       id:[''],
       name : [''],
@@ -55,14 +50,6 @@ export class EmployeeComponent implements OnInit {
   }
   handleSize(event:any) {
     this.mybreakpoint = (event.target.innerWidth <= 600) ? 1 :4;
-    // if(event.target.innerWidth <= 400){
-    //   this.mybreakpoint = 1;
-    // }
-    //  if(event.target.innerWidth <=600){
-    //   this.mybreakpoint = 2;
-    // }else{
-    //   this.mybreakpoint = 4;
-    // }
   }
 
   listView(){
@@ -131,9 +118,12 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(emp:Employee){
-    console.log(emp)
-    this.employeService.deleteEmployee(emp);
-    this.getAllEmployees();
+    if (this.employeService.isLoggedIn) {
+      this.employeService.deleteEmployee(emp);
+      this.getAllEmployees();
+    } else {
+      this.router.navigateByUrl("/login");
+    }
   }
 
   onTableDataChange(event: any) {

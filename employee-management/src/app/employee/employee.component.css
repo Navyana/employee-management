@@ -1,23 +1,26 @@
-.header{
+.header {
     padding: 10px 5px;
     display: flex;
 }
 
-a{
+a {
     font-size: 25px;
-    padding:7px  9px;
+    padding: 7px 9px;
     text-decoration: none;
     color: black;
 }
 
-a, button{
+a,
+button {
     display: inline-block;
     vertical-align: middle;
 }
-.grid{
+
+.grid {
     padding-bottom: 50px;
 }
-.list{
+
+.list {
     padding-bottom: 50px;
 }
 
@@ -25,51 +28,58 @@ a, button{
     max-width: 300px;
     width: 100%;
     height: 170px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-mat-grid-list{
+mat-grid-list {
     padding-bottom: 50px;
 }
-mat-card-title{
+
+mat-card-title {
     min-width: 100px;
     display: inline-block;
     padding-right: 10px;
     right: inherit;
 }
+
 mat-card::ng-deep.mat-card-header-text {
     width: 80%;
-  }
-mat-card-header{
+}
+
+mat-card-header {
     position: relative;
 }
-mat-card-subtitle{
+
+mat-card-subtitle {
     font-weight: 100;
     font-size: small;
 }
+
 mat-icon.mat-card-avatar {
     width: 40px;
     height: 40px;
     font-size: 40px;
 }
-mat-card-actions{
+
+mat-card-actions {
     display: flex
 }
-.edit{
+
+.edit {
     padding-right: 25px;
 }
-pagination-controls{
+
+pagination-controls {
     position: fixed;
     bottom: 0;
-    left: 40%;
-    padding-bottom: 40px;
+    left: 43%;
+    margin-bottom: 3%;
 }
-@media (max-width: 575px){
-    pagination-controls{
+
+@media (max-width: 575px) {
+    pagination-controls {
         position: static;
         left: 40%;
         padding-bottom: 40px;
     }
 }
-
-  

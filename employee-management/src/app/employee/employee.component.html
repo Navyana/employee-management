@@ -1,194 +1,211 @@
 <div class="container-fluid">
-    <nav class="header">
-        <a routerLink=''>Employee List</a>
-        <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addEmployee">Add employee</button>
-        <button type='button' class="btn btn-outline-dark me-2" style=" margin-left: auto;"
-                (click)="gridView()">
-                      <i class="fa fa-th-large" aria-hidden="true"></i></button>
-        <button class="btn btn-outline-dark float-right" style=" margin-right: 20px"
-                (click)="listView()">
-          <i class="fa fa-list-ul" aria-hidden="true"></i></button>
+  <nav class="header">
+    <a style="font-weight: bolder" routerLink="">Employee List</a>
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addEmployee">
+      Add employee
+    </button>
+    <button type="button" class="btn btn-outline-dark me-2" style="margin-left: auto" (click)="gridView()">
+      <i class="fa fa-th-large" aria-hidden="true"></i>
+    </button>
+    <button class="btn btn-outline-dark float-right" style="margin-right: 20px" (click)="listView()">
+      <i class="fa fa-list-ul" aria-hidden="true"></i>
+    </button>
+  </nav>
+  <!-- Add employee-->
+  <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Add Employee Details
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="employeeDetails">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name</label>
+              <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Position</label>
+              <input type="text" formControlName="position" class="form-control" id="position"
+                aria-describedby="emailHelp" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">About</label>
+              <input type="textArea" formControlName="about" class="form-control" id="about"
+                aria-describedby="emailHelp" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Joining date</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="joining_date" id="joining_date"
+                  ngbDatepicker #d="ngbDatepicker" />
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <i style="font-size: 20px" class="fa">&#xf073;</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="reset" class="btn btn-primary" (click)="addEmployee()">
+                Add employee
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    </nav>
-    <!-- Add employee-->
-    <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Edit Employee -->
+  <div *ngIf="canEditEmployee()">
+    <div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employee Details</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Edit Employee Details
+            </h1>
+            <button type="button" class="btn-close" id="edit-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form [formGroup]="employeeDetails">
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name</label>
-                    <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Position</label>
-                    <input type="text" formControlName="position" class="form-control" id="position" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">About</label>
-                    <input type="textArea" formControlName="about" class="form-control" id="about" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Joining date</label>
-                    <div class="input-group">
-                      <input class="form-control" placeholder="yyyy-mm-dd" formControlName="joining_date" id="joining_date" ngbDatepicker #d="ngbDatepicker">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i style="font-size:20px" class="fa">&#xf073;</i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="reset" class="btn btn-primary" (click)="addEmployee()">Add employee</button>
-                  </div>
-                </form>
-          </div>
-     
-        </div>
-      </div>
-    </div>
-
-    <!-- Edit Employee -->
-    <div *ngIf="canEditEmployee()">
-      <div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Employee Details</h1>
-              <button type="button" class="btn-close" id="edit-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form #updateValue = "ngForm" [formGroup]="employeeDetails">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Name</label>
-                      <input type="text" formControlName="name" class="form-control" id="name" name="name" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Position</label>
-                        <input type="text" formControlName="position" class="form-control" id="position" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">About</label>
-                        <input type="textArea" formControlName="about" class="form-control" id="about" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                      <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="joining_date" id="joining_date" ngbDatepicker #d="ngbDatepicker">
-                        <button class="btn btn-outline-secondary" bi bi-calendar3 (click)="d.toggle()" type="button"><i style="font-size:20px" class="fa">&#xf073;</i></button>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" (click)="editEmployee(employeeDetails.value)">Save</button>
-                      </div>
-                  </form>
-            </div>
-       
+            <form #updateValue="ngForm" [formGroup]="employeeDetails">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" formControlName="name" class="form-control" id="name" name="name"
+                  aria-describedby="emailHelp" />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Position</label>
+                <input type="text" formControlName="position" class="form-control" id="position"
+                  aria-describedby="emailHelp" />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">About</label>
+                <input type="textArea" formControlName="about" class="form-control" id="about"
+                  aria-describedby="emailHelp" />
+              </div>
+              <div class="mb-3">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" formControlName="joining_date" id="joining_date"
+                    ngbDatepicker #d="ngbDatepicker" />
+                  <button class="btn btn-outline-secondary" bi bi-calendar3 (click)="d.toggle()" type="button">
+                    <i style="font-size: 20px" class="fa">&#xf073;</i>
+                  </button>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary" (click)="editEmployee(employeeDetails.value)">
+                  Save
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    
+  </div>
 
-    <!-- grid view-->
-    <div *ngIf="grid">
-      <div class="grid">
-        <mat-grid-list [cols]="mybreakpoint"  rowHeight="200px" (window:resize)="handleSize($event)">
-          <mat-grid-tile *ngFor="let employee of empList| filter:searchData | paginate: {
-                              itemsPerPage: tableSize,
-                              currentPage: page,
-                              totalItems: count
-                          };index as i">
-            <mat-card class="example-card mat-elevation-z8">
-              <mat-card-header>
-                <mat-icon mat-card-avatar>account_circle</mat-icon>
-                <mat-card-title>{{employee.name}}</mat-card-title>
-                <mat-card-subtitle>{{employee.position}}</mat-card-subtitle>
-                <mat-card-actions>
-                  <button class="btn btn-outline-primary me-2"
-                        data-bs-toggle="modal" 
-                        data-bs-target="#editEmployee"
-                        (click)="onSelect(employee)">
+  <!-- grid view-->
+  <div *ngIf="grid">
+    <div class="grid">
+      <mat-grid-list [cols]="mybreakpoint" rowHeight="200px" (window:resize)="handleSize($event)">
+        <mat-grid-tile *ngFor="
+            let employee of empList
+              | filter : searchData
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            index as i
+          ">
+          <mat-card class="example-card mat-elevation-z8">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>account_circle</mat-icon>
+              <mat-card-title>{{ employee.name }}</mat-card-title>
+              <mat-card-subtitle>{{ employee.position }}</mat-card-subtitle>
+              <mat-card-actions>
+                <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee"
+                  (click)="onSelect(employee)">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </button>                
-                  <button class="btn btn-outline-danger"
-                        (click)="deleteEmployee(employee)">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                </mat-card-actions>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  {{employee.about}}
-                </p>
-                <p>
-                  JOINING DATE : {{employee.joining_date}}
-                </p>
-              </mat-card-content>
-              
-            </mat-card> 
-          </mat-grid-tile>
-        </mat-grid-list>
-        <pagination-controls
-            previousLabel="Prev"
-            nextLabel="Next"
-            (pageChange)="onTableDataChange($event)">
-        </pagination-controls>
-      </div>
+                </button>
+                <button class="btn btn-outline-danger" (click)="deleteEmployee(employee)">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </mat-card-actions>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{ employee.about }}
+              </p>
+              <p>JOINING DATE: {{ employee.joining_date }}</p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
     </div>
-    
-    <!--list view-->
-    <div *ngIf="list">
-      <div class="list">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Employee ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Position</th>
-              <th scope="col">About</th>
-              <th scope="col">Joining date</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let employee of empList
-                          | filter:searchData
-                          | paginate: {
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          };
-                          index as i">
-              <th>{{(page -1)*tableSize+i+1}}</th>
-              <td>{{employee.name}}</td>
-              <td>{{employee.position}}</td>
-              <td>{{employee.about}}</td>
-              <!-- <td>{{employee.joining_date | date:'dd-MM-yy' }}</td> -->
+  </div>
 
-              <td>{{employee.joining_date }}</td>
-              <td>
-                <button class="btn btn-outline-primary me-2" 
-                        data-bs-toggle="modal" data-bs-target="#editEmployee"
-                        (click)="onSelect(employee)"
-                        ><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button class="btn btn-outline-danger"
-                        (click)="deleteEmployee(employee)">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls
-            previousLabel="Prev"
-            nextLabel="Next"
-            (pageChange)="onTableDataChange($event)">
-        </pagination-controls>
-      </div>
+  <!--list view-->
+  <div *ngIf="list">
+    <div class="list">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Employee ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Position</th>
+            <th scope="col">About</th>
+            <th scope="col">Joining date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+              let employee of empList
+                | filter : searchData
+                | paginate
+                  : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    };
+              index as i
+            ">
+            <th>{{ (page - 1) * tableSize + i + 1 }}</th>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.about }}</td>
+            <!-- <td>{{employee.joining_date | date:'dd-MM-yy' }}</td> -->
+
+            <td>{{ employee.joining_date }}</td>
+            <td>
+              <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee"
+                (click)="onSelect(employee)">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-outline-danger" (click)="deleteEmployee(employee)">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
     </div>
-    
-  
-</div> 
+  </div>
+</div>

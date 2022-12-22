@@ -1,13 +1,13 @@
-nav{
-    display: flex;
+div {
+    height: 50px;
+    background-color: rgb(96, 93, 93);
     position: fixed;
     bottom: 0;
-    height: 40px;
     width: 100%;
-    background-color: grey;
-    margin-top: 40px;
+    padding-top: 10px;
 }
 
-div {
-    align-items: center;
+p {
+    color: white;
+    text-align: center;
 }
