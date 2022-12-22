@@ -22,6 +22,5 @@ export class HeaderComponent implements OnInit {
 
   loggedOut() {
     this.employeeService.isLoggedIn = false;
-    console.log(this.employeeService.isLoggedIn);
   }
 }

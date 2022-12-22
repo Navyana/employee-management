@@ -25,7 +25,6 @@ export class EmployeserviceService {
   addEmployee(employee: Employee) {
     this.allEmployees = JSON.parse(localStorage.getItem("data") || "[]");
     this.allEmployees.push(employee);
-    console.log(this.allEmployees);
     localStorage.setItem("data", JSON.stringify(this.allEmployees));
   }
 
