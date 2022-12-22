@@ -1,0 +1,27 @@
+<nav>
+    <ul>
+        <li>
+            <img class='logo' src="assets/logo/angular-icon-logo.png"> 
+        </li>
+        <li class="search">
+            <mat-icon class="search-icon">search</mat-icon>
+            <input class="form-control"  [(ngModel)]="searchText" (input)="search()" autocomplete="off" placeholder="search employee name">
+        </li>
+        <li>
+            <button class="mat-icon-button" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>menu</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <a *ngIf="!this.employeeService.isLoggedIn" routerLink='login'>Login</a>
+                <a *ngIf="this.employeeService.isLoggedIn" (click)="loggedOut()">Logout</a>
+                <a routerLink='' class="mat-menu-item">Employee list</a>
+              </mat-menu>
+        </li>
+        <li class="menu-items">
+            <a routerLink=''>Employee list</a>
+            <a *ngIf="!this.employeeService.isLoggedIn" routerLink='login'>Login</a>
+            <a *ngIf="this.employeeService.isLoggedIn" (click)="loggedOut()">Logout</a>
+        </li>
+    </ul>
+</nav>
+
