@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { EmployeserviceService } from "../services/employeservice.service";
 
@@ -12,12 +13,25 @@ export class HeaderComponent implements OnInit {
   isMenuOpen = false;
   canEdit = false;
 
-  constructor(public employeeService: EmployeserviceService) {}
+  constructor(
+    public employeeService: EmployeserviceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
+  containsSpecialCharacters(s: any) {
+    let regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
+    return regex.test(s);
+  }
+
   search() {
-    this.searchWord.emit(this.searchText);
+    if (this.containsSpecialCharacters(this.searchText)) {
+      this.router.navigateByUrl("/error");
+    } else {
+      this.router.navigateByUrl("/");
+      this.searchWord.emit(this.searchText);
+    }
   }
 
   loggedOut() {

@@ -1,4 +1,4 @@
-import { Component, NgModule, isDevMode } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
@@ -17,11 +17,9 @@ import { MatMenuModule } from "@angular/material/menu";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { ErrorComponent } from "./error/error.component";
 import { environment } from "../environments/environment";
-import { DatePipe } from "@angular/common";
+import { ErrorpageComponent } from "./errorpage/errorpage.component";
 
-Ng2SearchPipeModule;
 const appRoutes: Routes = [
   {
     path: "",
@@ -33,12 +31,12 @@ const appRoutes: Routes = [
     component: LoginComponent,
   },
   {
-    path: "**",
-    component: EmployeeComponent,
+    path: "error",
+    component: ErrorpageComponent,
   },
   {
-    path: "error",
-    component: ErrorComponent,
+    path: "**",
+    component: EmployeeComponent,
   },
 ];
 @NgModule({
@@ -48,7 +46,8 @@ const appRoutes: Routes = [
     FooterComponent,
     LoginComponent,
     EmployeeComponent,
-    ErrorComponent,
+    ErrorpageComponent,
+    ErrorpageComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +70,7 @@ const appRoutes: Routes = [
       registrationStrategy: "registerWhenStable:30000",
     }),
   ],
-  providers: [DatePipe],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

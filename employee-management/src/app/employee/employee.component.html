@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <nav class="header">
     <a style="font-weight: bolder" routerLink="">Employee List</a>
-    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addEmployee">
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addEmployee"
+      [disabled]="!canEditEmployee()">
       Add employee
     </button>
     <button type="button" class="btn btn-outline-dark me-2" style="margin-left: auto" (click)="gridView()">
@@ -118,7 +119,7 @@
   <!-- grid view-->
   <div *ngIf="grid">
     <div class="grid">
-      <mat-grid-list [cols]="mybreakpoint" rowHeight="200px" (window:resize)="handleSize($event)">
+      <mat-grid-list [cols]="mybreakpoint" rowHeight="250px" (window:resize)="handleSize($event)">
         <mat-grid-tile *ngFor="
             let employee of empList
               | filter : searchData
@@ -149,7 +150,10 @@
               <p>
                 {{ employee.about }}
               </p>
-              <p>JOINING DATE: {{ employee.joining_date }}</p>
+              <p>
+                <span style="color: rgb(255, 77, 137); font-weight: 500">JOINING DATE</span>: {{ employee.joining_date
+                }}
+              </p>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
@@ -189,8 +193,6 @@
             <td>{{ employee.name }}</td>
             <td>{{ employee.position }}</td>
             <td>{{ employee.about }}</td>
-            <!-- <td>{{employee.joining_date | date:'dd-MM-yy' }}</td> -->
-
             <td>{{ employee.joining_date }}</td>
             <td>
               <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee"
