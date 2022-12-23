@@ -96,6 +96,10 @@ export class EmployeeComponent implements OnInit {
     );
     this.employeService.addEmployee(this.employee);
     this.getAllEmployees();
+    let addClose = document.getElementById(
+      "add-close"
+    ) as HTMLButtonElement | null;
+    addClose?.click();
   }
 
   makeRandomID(): string {
@@ -133,6 +137,10 @@ export class EmployeeComponent implements OnInit {
   editEmployee(emp: Employee) {
     const id = this.editEmp.id;
     this.employeService.editEmployee(emp, id);
+    let editClose = document.getElementById(
+      "edit-close"
+    ) as HTMLButtonElement | null;
+    editClose?.click();
   }
 
   deleteEmployee(emp: Employee) {

@@ -51,7 +51,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <button type="button" id="add-close" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close
               </button>
               <button type="reset" class="btn btn-primary" (click)="addEmployee()">
@@ -102,7 +102,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <button type="button" id="edit-close" class="btn btn-secondary" data-bs-dismiss="modal">
                   Close
                 </button>
                 <button type="submit" class="btn btn-primary" (click)="editEmployee(employeeDetails.value)">
