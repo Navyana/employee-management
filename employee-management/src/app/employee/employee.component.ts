@@ -118,8 +118,8 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSelect(emp: Employee) {
-    this.editEmp = emp;
     if (this.employeService.isLoggedIn) {
+      this.editEmp = emp;
       let date_obj = { year: 0, month: 0, day: 0 };
       let emp_joining_date = emp.joining_date.split("/");
       date_obj.year = parseInt(emp_joining_date[2]);
@@ -141,6 +141,13 @@ export class EmployeeComponent implements OnInit {
       "edit-close"
     ) as HTMLButtonElement | null;
     editClose?.click();
+  }
+
+  onClose() {
+    this.employeeDetails.controls["name"].setValue("");
+    this.employeeDetails.controls["position"].setValue("");
+    this.employeeDetails.controls["about"].setValue("");
+    this.employeeDetails.controls["joining_date"].setValue("");
   }
 
   deleteEmployee(emp: Employee) {

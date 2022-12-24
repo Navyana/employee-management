@@ -73,7 +73,8 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">
               Edit Employee Details
             </h1>
-            <button type="button" class="btn-close" id="edit-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" (click)="onClose()" class="btn-close" id="edit-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form #updateValue="ngForm" [formGroup]="employeeDetails">
@@ -102,7 +103,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" id="edit-close" class="btn btn-secondary" data-bs-dismiss="modal">
+                <button type="button" (click)="onClose()" id="edit-close" class="btn btn-secondary"
+                  data-bs-dismiss="modal">
                   Close
                 </button>
                 <button type="submit" class="btn btn-primary" (click)="editEmployee(employeeDetails.value)">
